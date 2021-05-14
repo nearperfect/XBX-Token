@@ -1,0 +1,33 @@
+{
+  "name": "xbx-token",
+  "version": "1.0.0",
+  "description": "For xbx token smart contracts",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "4.1.0",
+    "chai": "4.3.4",
+    "ganache-cli": "6.12.2"
+  },
+  "devDependencies": {
+    "@openzeppelin/test-helpers": "0.5.11",
+    "mocha": "8.3.2",
+    "truffle": "5.3.4",
+    "truffle-contract-size": "2.0.1"
+  },
+  "scripts": {
+    "test": "npx truffle test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nearperfect/XBX-Token.git"
+  },
+  "author": "support@moac.io",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nearperfect/XBX-Token/issues"
+  },
+  "homepage": "https://github.com/nearperfect/XBX-Token#README.md"
+}
