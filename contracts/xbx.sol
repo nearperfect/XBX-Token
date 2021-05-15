@@ -71,7 +71,7 @@ contract XToken is Pausable, AccessControlEnumerable, ERC20 {
     // list account with minter role
     function getMinters() public view returns (address[] memory) {
         uint256 count = getRoleMemberCount(MINTER_ROLE);
-        address[]  memory minters_ = new address[](count);
+        address[] memory minters_ = new address[](count);
         for (uint index = 0; index < count; index++) {
             minters_[index] = getRoleMember(MINTER_ROLE, index);
         }

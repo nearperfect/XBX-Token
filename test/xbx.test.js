@@ -11,6 +11,7 @@ const Minter = artifacts.require('Minter');
 
 // Start test block
 contract('XToken', function ([ xOwner, minterOwner, user, user2 ]) {
+
     beforeEach(async function () {
         this.xtoken = await XToken.new("xbx token", "XBX", 1000000, {from: xOwner});
         this.minter = await Minter.new(this.xtoken.address, {from: minterOwner});
@@ -295,5 +296,35 @@ contract('XToken', function ([ xOwner, minterOwner, user, user2 ]) {
             this.xtoken.sendTransaction({from: user, value: 1000}),
             "revert"
         );
+    });
+
+    it('check mint by contract', async function () {
+        // user have 0 balance
+        balance = await this.xtoken.balanceOf(user);
+        expect(balance.toString()).to.equal("0");
+
+        // mint will revert for minter contract
+        result = await expectRevert(
+            this.minter.mint(user, 10000, {from: minterOwner}),
+            "Caller is not a minter"
+        );
+
+        // user remain 0 balance
+        balance = await this.xtoken.balanceOf(user);
+        expect(balance.toString()).to.equal("0");
+
+        // grant minter
+        result = await this.xtoken.grantMinter(this.minter.address, {from: xOwner});
+        addresses = await this.xtoken.getMinters();
+        expect(addresses.length).to.equal(2);
+        expect(addresses.includes(xOwner)).to.equal(true);
+        expect(addresses.includes(this.minter.address)).to.equal(true);
+
+        // mint by minter again
+        result = await this.minter.mint(user, 10000, {from: minterOwner});
+
+        // user now has 10000 balance
+        balance = await this.xtoken.balanceOf(user);
+        expect(balance.toString()).to.equal("10000");
     });
 });
