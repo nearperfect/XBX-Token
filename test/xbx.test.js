@@ -289,4 +289,11 @@ contract('XToken', function ([ xOwner, minterOwner, user, user2 ]) {
         allow = await this.xtoken.allowance(user, user2);
         expect(allow.toString()).to.equal("0");
     });
+
+    it('check reject ether transfer', async function () {
+        result = await expectRevert(
+            this.xtoken.sendTransaction({from: user, value: 1000}),
+            "revert"
+        );
+    });
 });
