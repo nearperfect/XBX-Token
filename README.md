@@ -3,28 +3,38 @@
 合约: contracts/xbx.sol  
 合约测试脚本: test/xbx.test.js
 
+---
 
-# 安装 install
+## 安装 install
+```bash
 npm install -g npx  
 npm install
+```
 
+---
 
-# 编译 compile
+## 编译 compile
 1. truffle编译  
+```bash
 npx truffle compile
+```
 
-或者
+或者 Or
 
 2. remix上在线编译  
 如果在remix上在线编译，需要将xbx.sol合约开头的import进行替换，
 具体见xbx.sol合约开头注释。solc选择0.8.4版本。
 
+---
 
-# 测试 test
+## 测试 test
+```bash
 npx truffle test
+```
 
+---
 
-# 功能点设计 functionality
+## 功能点设计 functionality
 1. 符合ERC20合约接口规范  
 2. 代币增发设置上限cap, cap可调整  
 3. 关键方法采用基于role的访问控制， role可以授予给地址，也可以吊销  
